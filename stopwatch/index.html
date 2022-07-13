@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="../js/jquery.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="time">00:00:00:000</div>
+
+    <div class="div">
+        <button onclick="te(h, mn, s, mms)">計時</button>
+        <button onclick="stop()">停止</button>
+        <button onclick="remove()">重設</button>
+    </div>
+
+    <script>
+        function toFixedLength(num, len) {
+            return num.toString().padStart(len, '0')
+        }
+
+        var timer = null
+        var ms = 0
+        var second = 0
+        var min = 0
+        var hour = 0
+
+        var h = mn = s = mms = null
+
+        function te(h, mn, s, mms) {
+            ms ? mms : 0
+            second ? s : 0
+            min ? mn : 0
+            hour ? h : 0
+            // console.log(ms, second, min, hour)
+
+            timer = setInterval(function () {
+                ms += 25
+                if (ms >= 1000) {
+                    ms = 0
+                    second += 1
+                }
+
+                if (second >= 60) {
+                    min += 1
+                    second = 0
+                }
+
+                if (min >= 60) {
+                    hour += 1
+                    min = 0
+                }
+
+                $('.time').text(toFixedLength(hour, 2) + ':' + toFixedLength(min, 2) + ':' + toFixedLength(second, 2) + ':' + toFixedLength(ms, 3))
+            }, 25)
+        }
+
+        function stop() {
+            clearInterval(timer)
+            mms = ms
+            s = second
+            mn = min
+            h = hour
+
+            // console.log(h, mn, s, mms)
+        }
+
+        function remove() {
+            clearInterval(timer)
+            $('.time').text('00:00:00:000')
+
+            ms = 0
+            second = 0
+            min = 0
+            hour = 0
+            h = mn = s = mms = 0
+        }
+
+
+        bool = true
+
+        document.addEventListener('keydown', function (e) {
+            if (e.keyCode == 32) {
+                if (bool) {
+                    bool = false
+                    te()
+                } else {
+                    bool = true
+                    stop()
+                }
+            } else if (e.keyCode == 67) {
+                remove()
+            }
+        })
+    </script>
+</body>
+
+</html>
