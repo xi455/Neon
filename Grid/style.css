@@ -1,0 +1,82 @@
+* {
+    padding: 0px;
+    margin: 0px;
+
+    box-shadow: none;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    width: 600px;
+    height: 600px;
+    border: 1px solid #333;
+
+    display: grid;
+
+    grid-area: ". . . . . ."
+        ". . . . . ."
+        ". . . . . ."
+        ". . . . . ."
+        ". . . . . ."
+        ". . . . . .";
+
+}
+
+span {
+    border: 1px solid #999;
+    margin: 0.1rem;
+}
+
+span:nth-child(1) {
+    grid-area: 1/1/1/4;
+}
+
+span:nth-child(2) {
+    grid-area: 1/4/1/4;
+}
+
+span:nth-child(3) {
+    grid-area: 1/5/1/5;
+}
+
+span:nth-child(4) {
+    grid-area: 1/6/1/6;
+}
+
+span:nth-child(5) {
+    grid-area: 2/1/2/6;
+}
+
+span:nth-child(6) {
+    grid-area: 2/6/4/6;
+}
+
+span:nth-child(7) {
+    grid-area: 3/1/8/1;
+}
+
+span:nth-child(8) {
+    grid-area: 3/2/5/6;
+}
+
+span:nth-child(9) {
+    grid-area: 4/6/6/6;
+}
+
+span:nth-child(10) {
+    grid-area: 5/2/8/6;
+}
+
+span:nth-child(11) {
+    grid-area: 6/6/8/6;
+}
+
+span:nth-child(12) {
+    grid-area: 8/1/8/7;
+}
