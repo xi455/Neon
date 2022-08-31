@@ -1,0 +1,62 @@
+* {
+
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.computer {
+    border: 1px solid #333;
+    border: 0.1rem solid #333;
+    border-radius: 3px;
+}
+
+.content {
+    width: 20rem;
+    height: 20rem;
+    margin: 5px;
+
+    display: grid;
+    grid-area: ". . . ."
+        ". . . ."
+        ". . . ."
+        ". . . ."
+        ". . . ."
+        ". . . .";
+}
+
+span {
+    border: 1px solid #333;
+    border-radius: 5px;
+    margin: 3px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#clear {
+    background-color: rgb(229, 183, 183);
+    grid-area: 2/1/2/5;
+}
+
+#text {
+    /* max-width: 280px;
+    max-height: 70px; */
+    font-size: 28px;
+    grid-area: 1/1/1/5;
+
+    justify-content: end;
+    padding: 5px;
+}
+
+.y {
+    background-color: rgb(228, 245, 216);
+}

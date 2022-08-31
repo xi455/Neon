@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="computer">
+        <div class="content">
+            <span id="text" data-text="404">0</span>
+            <span id="clear">C</span>   
+            <span>7</span>
+            <span>8</span>
+            <span>9</span>
+            <span class="y" id="add">+</span>
+            <span>4</span>
+            <span>5</span>
+            <span>6</span>
+            <span class="y" id="cut">-</span>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span class="y" id="MP">*</span>
+            <span>0</span>
+            <!-- <span>00</span> -->
+            <span>.</span>
+            <span class="y" id="ans">=</span>
+            <span class="y" id="remove">/</span>
+        </div>
+    </div>
+
+    <script>
+        const C = document.querySelector('#clear')
+        const add = document.querySelector('#add')
+        const cut = document.querySelector('#cut')
+        const remove = document.querySelector('#remove')
+        const ans = document.querySelector('#ans')
+
+        let any = document.querySelectorAll('span')
+        let text = document.querySelector('#text')
+        let cont = ''
+
+        console.log(any)
+        any.forEach(e => {
+            if((e.dataset.text != '404' && e.innerText != '=') || e.innerText == '.'){
+                e.addEventListener('click',() =>{
+                    if(text.innerText == '0'){
+                        text.innerText = ''
+                    }
+                    cont = cont + e.innerText
+                    text.innerText = text.innerText + e.innerText
+                })
+            }
+        });
+
+        C.addEventListener('click',()=>{
+            text.innerHTML = '0'
+            cont = ''
+        })
+
+        ans.addEventListener('click',() =>{
+            cont = eval(cont)
+            text.innerText = cont
+        })
+    </script>
+</body>
+</html>
