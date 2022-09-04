@@ -1,0 +1,22 @@
+.content {
+    position: relative;
+}
+
+.can {
+    border: 1px solid #333;
+    position: absolute;
+}
+
+.bord {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #333;
+    position: absolute;
+    /* z-index: 1; */
+}
+
+.put {
+    margin-top: 35%;
+    border: 1px solid #333;
+    object-fit: cover;
+}
