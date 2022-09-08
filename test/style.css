@@ -1,0 +1,50 @@
+body {
+    background-color: black;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 3px solid white;
+}
+
+span {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: white;
+    position: absolute;
+    transform-origin: 125px;
+    animation: eight 3s linear infinite;
+}
+
+@-webkit-keyframes eight {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+.s2 {
+    transform-origin: -80px;
+    animation-delay: 1s;
+    animation: eight-2 3s linear infinite;
+}
+
+@-webkit-keyframes eight-2 {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(-360deg);
+    }
+}
