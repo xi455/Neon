@@ -17,11 +17,11 @@ img.onload = function () {
 
     let StartX = 0
     let StartY = 0
-    document.addEventListener('mousedown', (e) => {
+    can.addEventListener('mousedown', (e) => {
         test.style.width = '0px'
         test.style.height = '0px'
-        StartX = e.clientX
-        StartY = e.clientY
+        StartX = e.offsetX
+        StartY = e.offsetY
 
         isBool = true
         test.style.top = `${StartY}px`
@@ -32,10 +32,10 @@ img.onload = function () {
 
     let mouseX = 0
     let mouseY = 0
-    document.addEventListener('mousemove', (e) => {
+    can.addEventListener('mousemove', (e) => {
         if (isBool) {
-            mouseX = e.clientX
-            mouseY = e.clientY
+            mouseX = e.offsetX
+            mouseY = e.offsetY
 
             if (StartX < mouseX && StartY < mouseY) {
                 test.style.width = `${mouseX - StartX}px`
@@ -64,13 +64,13 @@ img.onload = function () {
         }
     })
 
-    document.addEventListener('mouseup', () => {
+    can.addEventListener('mouseup', () => {
         isBool = false
 
         let img_put = ctx_can.getImageData(parseInt(test.style.left.replace("px", '')),
             parseInt(test.style.top.replace("px", '')), parseInt(test.style.width.replace("px", '')),
             parseInt(test.style.height.replace("px", '')))
-            
+
         put.width = `${img_put.width}`
         put.height = `${img_put.height}`
         ctx_put.putImageData(img_put, 0, 0)
