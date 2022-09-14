@@ -1,58 +1,100 @@
-const clip = document.querySelector('.clip')
-const dv = document.querySelector('div')
+const can = document.querySelector('.can')
 const put = document.querySelector('.put')
 
-const ctx_clip = clip.getContext('2d');
-const ctx_put = put.getContext('2d');
+const ctx_can = can.getContext('2d')
+const ctx_put = put.getContext('2d')
 
-let x = 0
-let y = 0
-let x2 = 0
-let y2 = 0
+const test = document.querySelector('.test')
 let isBool = false
 
 const img = new Image()
 img.src = '123.jpg'
 
 img.onload = function () {
-    ctx_clip.drawImage(img, 0, 0, clip.width, clip.height)
+    can.width = img.width
+    can.height = img.height
+    ctx_can.drawImage(img, 0, 0, img.width, img.height)
+
+    let StartX = 0
+    let StartY = 0
+    document.addEventListener('mousedown', (e) => {
+        test.style.width = '0px'
+        test.style.height = '0px'
+        StartX = e.clientX
+        StartY = e.clientY
+
+        isBool = true
+        test.style.top = `${StartY}px`
+        test.style.left = `${StartX}px`
+
+        ctx_put.clearRect(0, 0, put.width, put.height)
+    })
+
+    let mouseX = 0
+    let mouseY = 0
+    document.addEventListener('mousemove', (e) => {
+        if (isBool) {
+            mouseX = e.clientX
+            mouseY = e.clientY
+
+            if (StartX < mouseX && StartY < mouseY) {
+                test.style.width = `${mouseX - StartX}px`
+                test.style.height = `${mouseY - StartY}px`
+                test.style.top = `${StartY}px`
+                test.style.left = `${StartX}px`
+            }
+            if (StartX > mouseX && StartY > mouseY) {
+                test.style.width = `${StartX - mouseX}px`
+                test.style.height = `${StartY - mouseY}px`
+                test.style.top = `${mouseY}px`
+                test.style.left = `${mouseX}px`
+            }
+            if (StartX > mouseX && StartY < mouseY) {
+                test.style.width = `${StartX - mouseX}px`
+                test.style.height = `${mouseY - StartY}px`
+                test.style.top = `${StartY}px`
+                test.style.left = `${mouseX}px`
+            }
+            if (StartX < mouseX && StartY > mouseY) {
+                test.style.width = `${mouseX - StartX}px`
+                test.style.height = `${StartY - mouseY}px`
+                test.style.top = `${mouseY}px`
+                test.style.left = `${StartX}px`
+            }
+        }
+    })
+
+    document.addEventListener('mouseup', () => {
+        isBool = false
+
+        let img_put = ctx_can.getImageData(parseInt(test.style.left.replace("px", '')),
+            parseInt(test.style.top.replace("px", '')), parseInt(test.style.width.replace("px", '')),
+            parseInt(test.style.height.replace("px", '')))
+            
+        put.width = `${img_put.width}`
+        put.height = `${img_put.height}`
+        ctx_put.putImageData(img_put, 0, 0)
+
+    })
+
 }
 
-document.addEventListener('mousedown', (e) => {
-    x = e.offsetX
-    y = e.offsetY
-    isBool = true
+function download(put) {
+    // console.log(put)
+    let canvas = document.querySelector(put)
+    let down = document.createElement('a')
+    // console.log(imgURL)
+    down.href = canvas.toDataURL()
+    console.log(down.href)
 
-    // dv.style.display = 'block'
-    dv.style.left = `${x}px`
-    dv.style.top = `${y}px`
-
-    put.style.width = '0px'
-    put.style.height = '0px'
-    put.style.display = 'none'
-
-    ctx_put.clearRect(0, 0, put.width, put.height)
-})
-
-document.addEventListener('mousemove', (event) => {
-    if (isBool) {
-        x2 = event.offsetX - x
-        y2 = event.offsetY - y
-
-        dv.style.width = `${Math.abs(x2)}px`
-        dv.style.height = `${Math.abs(y2)}px`
+    let name = ''
+    for (let i = 0; i < 5; i++) {
+        name += String(parseInt(Math.random() * 10))
     }
-})
+    console.log(name)
 
-document.addEventListener('mouseup', () => {
-    let clip_Img = ctx_clip.getImageData(x, y, x2, y2)
-    ctx_put.putImageData(clip_Img, 0, 0)
+    down.download = `${name}.jpeg`
 
-    put.style.width = `${Math.abs(x2)}px`
-    put.style.height = `${Math.abs(y2)}px`
-    put.style.display = 'block'
-
-    isBool = false
-    x = 0
-    y = 0
-})
+    down.click()
+    // console.log(imgURL)
+}

@@ -5,11 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
-    <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<style>
+    *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    .content{
+        /* width: 363px;
+        height: 203px; */
+        position: relative;
+        /* overflow: hidden; */
+    }
+    .test{
+        border: 0.1rem solid #333;
+        position: absolute;
+        z-index: 100;
+
+    }
+
+    .inp{
+        border: 0.1rem solid #333;
+        position: absolute;
+    }
     
+    .put{
+        border: 0.1rem solid #333;
+    }
+
+    .can{
+        border: 0.1rem solid #333;
+    }
+</style>
+<body>
+    <div class="content">
+        <canvas class="can" width="" height=""></canvas>
+        <div class="test"></div>
+    </div>
+    <canvas class="put" width="" height=""></canvas>
+    <button onclick="download('.put')">下載</button>
 </body>
+
 <script src="style.js"></script>
 </html>
